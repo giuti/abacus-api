@@ -12,7 +12,10 @@ config :logger, level: :warn
 # Configure your database
 config :abacus_api, AbacusApi.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "0000",
   database: "abacus_api_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+# Configure bcrypt
+config :bcrypt_elixir, :log_rounds, 4
