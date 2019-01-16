@@ -7,5 +7,6 @@ defmodule AbacusApiWeb.Router do
 
   scope "/api", AbacusApiWeb do
     pipe_through :api
+    resources "/users", UserController, except: [:new, :edit]
   end
 end
