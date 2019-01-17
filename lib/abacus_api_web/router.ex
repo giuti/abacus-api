@@ -18,6 +18,7 @@ defmodule AbacusApiWeb.Router do
   scope "/api", AbacusApiWeb do
     pipe_through [:api, :api_auth]
     resources "/users", UserController, except: [:new, :edit]
+    resources "/teams", TeamController, only: [:index, :show]
   end
 
   # Plug function

@@ -41,6 +41,7 @@ defmodule AbacusApiWeb.UserController do
     end
   end
 
+  #TODO: Solve warning generated when running tests (render/4 with a view is deprecated)
   def sign_in(conn, %{"email" => email, "password" => password}) do
     case AbacusApi.Auth.authenticate_user(email, password) do
       {:ok, user} ->
