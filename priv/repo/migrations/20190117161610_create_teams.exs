@@ -15,7 +15,6 @@ defmodule AbacusApi.Repo.Migrations.CreateTeams do
       add :goalsFor, :integer
       add :goalsAgainst, :integer
       add :goalsDiff, :integer
-      add :teamsDiff, :map
 
       timestamps()
     end

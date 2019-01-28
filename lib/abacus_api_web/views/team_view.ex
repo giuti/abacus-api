@@ -23,7 +23,6 @@ defmodule AbacusApiWeb.TeamView do
       points: team.points,
       goalsFor: team.goalsFor,
       goalsAgainst: team.goalsAgainst,
-      goalsDiff: team.goalsDiff,
-      teamsDiff: team.teamsDiff}
+      goalsDiff: team.goalsDiff}
   end
 end

@@ -15,7 +15,6 @@ defmodule AbacusApi.Resources.Team do
     field :points, :integer
     field :position, :integer
     field :teamId, :integer
-    field :teamsDiff, :map
     field :won, :integer
 
     timestamps()
@@ -24,7 +23,7 @@ defmodule AbacusApi.Resources.Team do
   @doc false
   def changeset(team, attrs) do
     team
-    |> cast(attrs, [:teamId, :position, :name, :crest, :played, :won, :draw, :lost, :points, :goalsFor, :goalsAgainst, :goalsDiff, :teamsDiff])
-    |> validate_required([:teamId, :position, :name, :crest, :played, :won, :draw, :lost, :points, :goalsFor, :goalsAgainst, :goalsDiff, :teamsDiff])
+    |> cast(attrs, [:teamId, :position, :name, :crest, :played, :won, :draw, :lost, :points, :goalsFor, :goalsAgainst, :goalsDiff])
+    |> validate_required([:teamId])
   end
 end

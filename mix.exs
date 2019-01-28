@@ -43,7 +43,7 @@ defmodule AbacusApi.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:bcrypt_elixir, "~> 1.1"},
       {:httpoison, "~> 1.4"},
-      {:poison, "~> 3.1"}
+      {:exjson, "~> 0.6.0"}
     ]
   end
 

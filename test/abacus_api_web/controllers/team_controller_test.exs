@@ -16,7 +16,6 @@ defmodule AbacusApiWeb.TeamControllerTest do
     points: 42,
     position: 42,
     teamId: 42,
-    teamsDiff: %{},
     won: 42
   }
   @update_attrs %{
@@ -31,10 +30,9 @@ defmodule AbacusApiWeb.TeamControllerTest do
     points: 43,
     position: 43,
     teamId: 43,
-    teamsDiff: %{},
     won: 43
   }
-  @invalid_attrs %{crest: nil, draw: nil, goalsAgainst: nil, goalsDiff: nil, goalsFor: nil, lost: nil, name: nil, played: nil, points: nil, position: nil, teamId: nil, teamsDiff: nil, won: nil}
+  @invalid_attrs %{crest: nil, draw: nil, goalsAgainst: nil, goalsDiff: nil, goalsFor: nil, lost: nil, name: nil, played: nil, points: nil, position: nil, teamId: nil, won: nil}
 
   def fixture(:team) do
     {:ok, team} = Resources.create_team(@create_attrs)
