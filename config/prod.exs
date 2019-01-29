@@ -10,7 +10,7 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :abacus_api, AbacusApiWeb.Endpoint,
-  url: [scheme: "https", host: "secret-ravine-48389.herokuapp.com", port: 443],
+  url: [scheme: "https", host: "abacus-api.herokuapp.com", port: 443],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   cache_static_manifest: "priv/static/cache_manifest.json",
   secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE")
