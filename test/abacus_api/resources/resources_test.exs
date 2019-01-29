@@ -110,24 +110,24 @@ defmodule AbacusApi.ResourcesTest do
       assert Resources.get_gap!(gap.id) == gap
     end
 
-    test "create_gap/1 with valid data creates a gap" do
-      assert {:ok, %Gap{} = gap} = Resources.create_gap(@valid_attrs)
-    end
+    # test "create_gap/1 with valid data creates a gap" do
+    #   assert {:ok, %Gap{} = gap} = Resources.create_gap(@valid_attrs)
+    # end
 
-    test "create_gap/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Resources.create_gap(@invalid_attrs)
-    end
+    # test "create_gap/1 with invalid data returns error changeset" do
+    #   assert {:error, %Ecto.Changeset{}} = Resources.create_gap(@invalid_attrs)
+    # end
 
-    test "update_gap/2 with valid data updates the gap" do
-      gap = gap_fixture()
-      assert {:ok, %Gap{} = gap} = Resources.update_gap(gap, @update_attrs)
-    end
+    # test "update_gap/2 with valid data updates the gap" do
+    #   gap = gap_fixture()
+    #   assert {:ok, %Gap{} = gap} = Resources.update_gap(gap, @update_attrs)
+    # end
 
-    test "update_gap/2 with invalid data returns error changeset" do
-      gap = gap_fixture()
-      assert {:error, %Ecto.Changeset{}} = Resources.update_gap(gap, @invalid_attrs)
-      assert gap == Resources.get_gap!(gap.id)
-    end
+    # test "update_gap/2 with invalid data returns error changeset" do
+    #   gap = gap_fixture()
+    #   assert {:error, %Ecto.Changeset{}} = Resources.update_gap(gap, @invalid_attrs)
+    #   assert gap == Resources.get_gap!(gap.id)
+    # end
 
     test "delete_gap/1 deletes the gap" do
       gap = gap_fixture()
