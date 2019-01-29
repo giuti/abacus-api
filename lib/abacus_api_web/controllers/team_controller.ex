@@ -3,7 +3,6 @@ defmodule AbacusApiWeb.TeamController do
 
   alias AbacusApi.Resources
   alias AbacusApi.Resources.Team
-  alias AbacusApi.Resources.Gap
   alias AbacusApi.Repo
 
   action_fallback AbacusApiWeb.FallbackController

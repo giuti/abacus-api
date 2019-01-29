@@ -2,7 +2,6 @@ defmodule AbacusApiWeb.GapController do
   use AbacusApiWeb, :controller
 
   alias AbacusApi.Resources
-  alias AbacusApi.Resources.Gap
 
   action_fallback AbacusApiWeb.FallbackController
 
