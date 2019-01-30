@@ -20,7 +20,7 @@ defmodule AbacusApiWeb.TeamController do
   def updateTeams(conn, _params) do
     HTTPoison.start
 
-    standingsJsonList = HTTPoison.get!("http://api.football-data.org/v2/competitions/2014/standings", [{"X-Auth-Token", Map.fetch!(System.get_env(), "DANIEL_API_KEY")}])
+    standingsJsonList = HTTPoison.get!("http://api.football-data.org/v2/competitions/2014/standings", [{"X-Auth-Token", System.get_env("DANIEL_API_KEY")}])
     resultStandingMap = ExJSON.parse(standingsJsonList.body, :to_map)
     standingsMapList = resultStandingMap["standings"]
     totalStandingMap = hd(standingsMapList)
@@ -45,7 +45,7 @@ defmodule AbacusApiWeb.TeamController do
       end
     end
 
-    matchesJsonList = HTTPoison.get!("http://api.football-data.org/v2/competitions/2014/matches", [{"X-Auth-Token", Map.fetch!(System.get_env(), "DANIEL_API_KEY")}])
+    matchesJsonList = HTTPoison.get!("http://api.football-data.org/v2/competitions/2014/matches", [{"X-Auth-Token", System.get_env("DANIEL_API_KEY")}])
     resultMatchesMap = ExJSON.parse(matchesJsonList.body, :to_map)
     matchesMapList = resultMatchesMap["matches"]
     for map <- matchesMapList do
