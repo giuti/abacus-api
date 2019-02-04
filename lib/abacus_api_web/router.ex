@@ -23,6 +23,8 @@ defmodule AbacusApiWeb.Router do
     resources "/teams", TeamController, only: [:index, :show]
 
     get "/gaps", GapController, :index
+
+    get "/matches", MatchController, :index
   end
 
   # Plug function

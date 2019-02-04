@@ -3,6 +3,7 @@ defmodule AbacusApiWeb.TeamController do
 
   alias AbacusApi.Resources
   alias AbacusApi.Resources.Team
+  alias AbacusApi.Resources.Match
   alias AbacusApi.Repo
 
   action_fallback AbacusApiWeb.FallbackController
@@ -29,19 +30,9 @@ defmodule AbacusApiWeb.TeamController do
       mapTeam = map["team"]
       team = Repo.get_by(Team, teamId: mapTeam["id"])
       if team do
-        IO.puts "_UPDATE_"
-        IO.inspect mapTeam["name"]
         Resources.update_team(team, %{"teamId" => mapTeam["id"], "position" => map["position"], "name" => mapTeam["name"], "crest" => mapTeam["crestUrl"], "played" => map["playedGames"], "won" => map["won"], "draw" => map["draw"], "lost" => map["lost"], "points" => map["points"], "goalsFor" => map["goalsFor"], "goalsAgainst" => map["goalsAgainst"], "goalsDiff" => map["goalDifference"]})
-        #team
-         # |> Team.changeset(%{"teamId" => mapTeam["id"], "position" => map["position"], "name" => mapTeam["name"], "crest" => mapTeam["crestUrl"], "played" => map["playedGames"], "won" => map["won"], "draw" => map["draw"], "lost" => map["lost"], "points" => map["points"], "goalsFor" => map["goalsFor"], "goalsAgainst" => map["goalsAgainst"], "goalsDiff" => map["goalDifference"]})
-         # |> Repo.update()
       else
-        IO.puts "_CREATE_"
-        IO.inspect mapTeam["name"]
         Resources.create_team(%{"teamId" => mapTeam["id"], "position" => map["position"], "name" => mapTeam["name"], "crest" => mapTeam["crestUrl"], "played" => map["playedGames"], "won" => map["won"], "draw" => map["draw"], "lost" => map["lost"], "points" => map["points"], "goalsFor" => map["goalsFor"], "goalsAgainst" => map["goalsAgainst"], "goalsDiff" => map["goalDifference"]})
-        #%Team{}
-         # |> Team.changeset(%{"teamId" => mapTeam["id"], "position" => map["position"], "name" => mapTeam["name"], "crest" => mapTeam["crestUrl"], "played" => map["playedGames"], "won" => map["won"], "draw" => map["draw"], "lost" => map["lost"], "points" => map["points"], "goalsFor" => map["goalsFor"], "goalsAgainst" => map["goalsAgainst"], "goalsDiff" => map["goalDifference"]})
-         # |> Repo.insert()
       end
     end
 
@@ -58,6 +49,13 @@ defmodule AbacusApiWeb.TeamController do
       if fullTime["homeTeam"] do
         calculatedDiff = fullTime["homeTeam"] - fullTime["awayTeam"]
         Resources.create_gap(%{"teamId" => team.id, "awayTeamId" => awayTeam.id, "diff" => calculatedDiff})
+      end
+
+      match = Repo.get_by(Match, matchId: map["id"])
+      if match do
+        Resources.update_match(match, %{"awayTeamGoals" => fullTime["awayTeam"], "homeTeamGoals" => fullTime["homeTeam"], "matchId" => map["id"], "matchday" => map["matchday"], "status" => map["status"], "utcDate" => map["utcDate"], "homeTeamId" => team.id, "awayTeamId" => awayTeam.id})
+      else
+        Resources.create_match(%{"awayTeamGoals" => fullTime["awayTeam"], "homeTeamGoals" => fullTime["homeTeam"], "matchId" => map["id"], "matchday" => map["matchday"], "status" => map["status"], "utcDate" => map["utcDate"], "homeTeamId" => team.id, "awayTeamId" => awayTeam.id})
       end
     end
 

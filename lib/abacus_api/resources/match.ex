@@ -20,6 +20,6 @@ defmodule AbacusApi.Resources.Match do
   def changeset(match, attrs) do
     match
     |> cast(attrs, [:matchId, :utcDate, :status, :matchday, :homeTeamGoals, :awayTeamGoals])
-    |> validate_required([:matchId, :utcDate, :status, :matchday, :homeTeamGoals, :awayTeamGoals])
+    |> validate_required([:matchId])
   end
 end
