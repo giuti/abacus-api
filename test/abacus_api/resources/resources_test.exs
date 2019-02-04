@@ -140,4 +140,73 @@ defmodule AbacusApi.ResourcesTest do
       assert %Ecto.Changeset{} = Resources.change_gap(gap)
     end
   end
+
+  describe "matches" do
+    alias AbacusApi.Resources.Match
+
+    @valid_attrs %{awayTeamGoals: 42, homeTeamGoals: 42, matchId: 42, matchday: 42, status: "some status", utcDate: "some utcDate"}
+    @update_attrs %{awayTeamGoals: 43, homeTeamGoals: 43, matchId: 43, matchday: 43, status: "some updated status", utcDate: "some updated utcDate"}
+    @invalid_attrs %{awayTeamGoals: nil, homeTeamGoals: nil, matchId: nil, matchday: nil, status: nil, utcDate: nil}
+
+    def match_fixture(attrs \\ %{}) do
+      {:ok, match} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Resources.create_match()
+
+      match
+    end
+
+    test "list_matches/0 returns all matches" do
+      match = match_fixture()
+      assert Resources.list_matches() == [match]
+    end
+
+    test "get_match!/1 returns the match with given id" do
+      match = match_fixture()
+      assert Resources.get_match!(match.id) == match
+    end
+
+    test "create_match/1 with valid data creates a match" do
+      assert {:ok, %Match{} = match} = Resources.create_match(@valid_attrs)
+      assert match.awayTeamGoals == 42
+      assert match.homeTeamGoals == 42
+      assert match.matchId == 42
+      assert match.matchday == 42
+      assert match.status == "some status"
+      assert match.utcDate == "some utcDate"
+    end
+
+    test "create_match/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Resources.create_match(@invalid_attrs)
+    end
+
+    test "update_match/2 with valid data updates the match" do
+      match = match_fixture()
+      assert {:ok, %Match{} = match} = Resources.update_match(match, @update_attrs)
+      assert match.awayTeamGoals == 43
+      assert match.homeTeamGoals == 43
+      assert match.matchId == 43
+      assert match.matchday == 43
+      assert match.status == "some updated status"
+      assert match.utcDate == "some updated utcDate"
+    end
+
+    test "update_match/2 with invalid data returns error changeset" do
+      match = match_fixture()
+      assert {:error, %Ecto.Changeset{}} = Resources.update_match(match, @invalid_attrs)
+      assert match == Resources.get_match!(match.id)
+    end
+
+    test "delete_match/1 deletes the match" do
+      match = match_fixture()
+      assert {:ok, %Match{}} = Resources.delete_match(match)
+      assert_raise Ecto.NoResultsError, fn -> Resources.get_match!(match.id) end
+    end
+
+    test "change_match/1 returns a match changeset" do
+      match = match_fixture()
+      assert %Ecto.Changeset{} = Resources.change_match(match)
+    end
+  end
 end
