@@ -6,38 +6,43 @@ defmodule AbacusApiWeb.Router do
     plug :fetch_session
   end
 
-  pipeline :api_auth do
-    plug :ensure_authenticated
-  end
+  # pipeline :api_auth do
+  #   plug :ensure_authenticated
+  # end
 
   scope "/api", AbacusApiWeb do
     pipe_through :api
-    post "/users/sign_in", UserController, :sign_in
-  end
-
-  scope "/api", AbacusApiWeb do
-    pipe_through [:api, :api_auth]
-    resources "/users", UserController, except: [:new, :edit]
-    
-    get "/teams/update", TeamController, :updateTeams
-    resources "/teams", TeamController, only: [:index, :show]
-
+    get "/teams", TeamController, :index
     get "/gaps", GapController, :index
-
     get "/matches", MatchController, :index
+    get "/users", UserController, :index
+
+    # post "/users/sign_in", UserController, :sign_in
   end
+
+  # scope "/api", AbacusApiWeb do
+  #   pipe_through [:api, :api_auth]
+  #   resources "/users", UserController, except: [:new, :edit]
+    
+  #   get "/teams/update", TeamController, :updateTeams
+  #   resources "/teams", TeamController, only: [:index, :show]
+
+  #   get "/gaps", GapController, :index
+
+  #   get "/matches", MatchController, :index
+  # end
 
   # Plug function
-  defp ensure_authenticated(conn, _opts) do
-    current_user_id = get_session(conn, :current_user_id)
+  # defp ensure_authenticated(conn, _opts) do
+  #   current_user_id = get_session(conn, :current_user_id)
 
-    if current_user_id do
-      conn
-    else
-      conn
-      |> put_status(:unauthorized)
-      |> render(AbacusApiWeb.ErrorView, "401.json", message: "Unauthenticated user")
-      |> halt()
-    end
-  end
+  #   if current_user_id do
+  #     conn
+  #   else
+  #     conn
+  #     |> put_status(:unauthorized)
+  #     |> render(AbacusApiWeb.ErrorView, "401.json", message: "Unauthenticated user")
+  #     |> halt()
+  #   end
+  # end
 end
