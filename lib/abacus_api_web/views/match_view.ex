@@ -17,6 +17,10 @@ defmodule AbacusApiWeb.MatchView do
       status: match.status,
       matchday: match.matchday,
       homeTeamGoals: match.homeTeamGoals,
-      awayTeamGoals: match.awayTeamGoals}
+      awayTeamGoals: match.awayTeamGoals,
+      homeTeamId: match.homeTeamId,
+      awayTeamId: match.awayTeamId,
+      homeTeamName: match.homeTeamName,
+      awayTeamName: match.awayTeamName}
   end
 end
