@@ -12,8 +12,9 @@ defmodule AbacusApiWeb.Router do
 
   scope "/api", AbacusApiWeb do
     pipe_through :api
-    resources "/teams", TeamController, only: [:index, :show]
+    
     get "/teams/update", TeamController, :updateTeams
+    get "/teams", TeamController, :index
     get "/gaps", GapController, :index
     get "/matches", MatchController, :index
     get "/users", UserController, :index

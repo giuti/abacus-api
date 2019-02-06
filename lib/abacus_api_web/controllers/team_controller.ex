@@ -41,21 +41,21 @@ defmodule AbacusApiWeb.TeamController do
     matchesMapList = resultMatchesMap["matches"]
     for map <- matchesMapList do
       mapHomeTeam = map["homeTeam"]
-      team = Repo.get_by(Team, teamId: mapHomeTeam["id"])
+      homeTeam = Repo.get_by(Team, teamId: mapHomeTeam["id"])
       mapAwayTeam = map["awayTeam"]
       awayTeam = Repo.get_by(Team, teamId: mapAwayTeam["id"])
       score = map["score"]
       fullTime = score["fullTime"]
       if fullTime["homeTeam"] do
         calculatedDiff = fullTime["homeTeam"] - fullTime["awayTeam"]
-        Resources.create_gap(%{"teamId" => team.id, "awayTeamId" => awayTeam.id, "diff" => calculatedDiff})
+        Resources.create_gap(%{"teamId" => homeTeam.id, "awayTeamId" => awayTeam.id, "diff" => calculatedDiff})
       end
 
       match = Repo.get_by(Match, matchId: map["id"])
       if match do
-        Resources.update_match(match, %{"awayTeamGoals" => fullTime["awayTeam"], "homeTeamGoals" => fullTime["homeTeam"], "matchId" => map["id"], "matchday" => map["matchday"], "status" => map["status"], "utcDate" => map["utcDate"], "homeTeamId" => team.id, "awayTeamId" => awayTeam.id, "homeTeamName" => mapHomeTeam["name"], "awayTeamName" => mapAwayTeam["name"]})
+        Resources.update_match(match, %{"awayTeamGoals" => fullTime["awayTeam"], "homeTeamGoals" => fullTime["homeTeam"], "matchId" => map["id"], "matchday" => map["matchday"], "status" => map["status"], "utcDate" => map["utcDate"], "homeTeamId" => homeTeam.id, "awayTeamId" => awayTeam.id, "homeTeamName" => mapHomeTeam["name"], "awayTeamName" => mapAwayTeam["name"]})
       else
-        Resources.create_match(%{"awayTeamGoals" => fullTime["awayTeam"], "homeTeamGoals" => fullTime["homeTeam"], "matchId" => map["id"], "matchday" => map["matchday"], "status" => map["status"], "utcDate" => map["utcDate"], "homeTeamId" => team.id, "awayTeamId" => awayTeam.id, "homeTeamName" => mapHomeTeam["name"], "awayTeamName" =>mapAwayTeam["name"]})
+        Resources.create_match(%{"awayTeamGoals" => fullTime["awayTeam"], "homeTeamGoals" => fullTime["homeTeam"], "matchId" => map["id"], "matchday" => map["matchday"], "status" => map["status"], "utcDate" => map["utcDate"], "homeTeamId" => homeTeam.id, "awayTeamId" => awayTeam.id, "homeTeamName" => mapHomeTeam["name"], "awayTeamName" =>mapAwayTeam["name"]})
       end
     end
 
