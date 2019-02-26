@@ -21,6 +21,8 @@ defmodule AbacusApiWeb.MatchView do
       homeTeamId: match.homeTeamId,
       awayTeamId: match.awayTeamId,
       homeTeamName: match.homeTeamName,
-      awayTeamName: match.awayTeamName}
+      awayTeamName: match.awayTeamName,
+      homeCrest: match.homeCrest,
+      awayCrest: match.awayCrest}
   end
 end

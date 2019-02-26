@@ -14,6 +14,8 @@ defmodule AbacusApi.Resources.Match do
     field :awayTeamId, :id
     field :homeTeamName, :string
     field :awayTeamName, :string
+    field :homeCrest, :string
+    field :awayCrest, :string
 
     timestamps()
   end
@@ -21,7 +23,7 @@ defmodule AbacusApi.Resources.Match do
   @doc false
   def changeset(match, attrs) do
     match
-    |> cast(attrs, [:matchId, :utcDate, :status, :matchday, :homeTeamGoals, :awayTeamGoals, :homeTeamId, :awayTeamId, :homeTeamName, :awayTeamName])
+    |> cast(attrs, [:matchId, :utcDate, :status, :matchday, :homeTeamGoals, :awayTeamGoals, :homeTeamId, :awayTeamId, :homeTeamName, :awayTeamName, :homeCrest, :awayCrest])
     |> validate_required([:matchId])
   end
 end

@@ -53,9 +53,9 @@ defmodule AbacusApiWeb.TeamController do
 
       match = Repo.get_by(Match, matchId: map["id"])
       if match do
-        Resources.update_match(match, %{"awayTeamGoals" => fullTime["awayTeam"], "homeTeamGoals" => fullTime["homeTeam"], "matchId" => map["id"], "matchday" => map["matchday"], "status" => map["status"], "utcDate" => map["utcDate"], "homeTeamId" => homeTeam.id, "awayTeamId" => awayTeam.id, "homeTeamName" => mapHomeTeam["name"], "awayTeamName" => mapAwayTeam["name"]})
+        Resources.update_match(match, %{"awayTeamGoals" => fullTime["awayTeam"], "homeTeamGoals" => fullTime["homeTeam"], "matchId" => map["id"], "matchday" => map["matchday"], "status" => map["status"], "utcDate" => map["utcDate"], "homeTeamId" => homeTeam.id, "awayTeamId" => awayTeam.id, "homeTeamName" => mapHomeTeam["name"], "awayTeamName" => mapAwayTeam["name"], "homeCrest" => homeTeam.crest, "awayCrest" => awayTeam.crest})
       else
-        Resources.create_match(%{"awayTeamGoals" => fullTime["awayTeam"], "homeTeamGoals" => fullTime["homeTeam"], "matchId" => map["id"], "matchday" => map["matchday"], "status" => map["status"], "utcDate" => map["utcDate"], "homeTeamId" => homeTeam.id, "awayTeamId" => awayTeam.id, "homeTeamName" => mapHomeTeam["name"], "awayTeamName" =>mapAwayTeam["name"]})
+        Resources.create_match(%{"awayTeamGoals" => fullTime["awayTeam"], "homeTeamGoals" => fullTime["homeTeam"], "matchId" => map["id"], "matchday" => map["matchday"], "status" => map["status"], "utcDate" => map["utcDate"], "homeTeamId" => homeTeam.id, "awayTeamId" => awayTeam.id, "homeTeamName" => mapHomeTeam["name"], "awayTeamName" =>mapAwayTeam["name"], "homeCrest" => homeTeam.crest, "awayCrest" => awayTeam.crest})
       end
     end
 
