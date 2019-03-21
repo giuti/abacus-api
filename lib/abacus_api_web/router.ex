@@ -14,6 +14,7 @@ defmodule AbacusApiWeb.Router do
     pipe_through :api
     
     get "/teams/update", TeamController, :updateTeams
+    get "/teams/reset", TeamController, :resetSeason
     get "/teams", TeamController, :index
     get "/gaps", GapController, :index
     get "/matches", MatchController, :index
