@@ -62,19 +62,4 @@ defmodule AbacusApiWeb.TeamController do
     teams = Resources.list_teams()
     render(conn, "index.json", teams: teams)
   end
-
-  def resetSeason(conn, _params) do
-    teams = Resources.list_teams()
-    matches = Resources.list_matches()
-    gaps = Resources.list_gaps()
-    for team <- teams do
-      Resources.delete_team(team)
-    end
-    for match <- matches do
-      Resources.delete_match(match)
-    end
-    for gap <- gaps do
-      Resources.delete_gap(gap)
-    end
-  end
 end
